@@ -34,7 +34,7 @@ namespace FirisbeCase.Application.Features.Authors.Queries
             public async Task<IDataResult<AuthorListModel>> Handle(GetAuthorListQuery request, CancellationToken cancellationToken)
             {
                 IPaginate<Author> authors = await _authorDependencies.AuthorRepository.GetListAsync(
-                    index: request.ListRequestParameter.Page, size: request.ListRequestParameter.PageSize, include: m => m.Include(a => a.Books), 
+                    index: request.ListRequestParameter.Page, size: request.ListRequestParameter.PageSize,
                     cancellationToken: cancellationToken);
                 AuthorListModel authorListModel = _authorDependencies.Mapper.Map<AuthorListModel>(authors);
                 return new SuccessDataResult<AuthorListModel>(authorListModel, Messages.AuthorsListed);
